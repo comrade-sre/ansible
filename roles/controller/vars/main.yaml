@@ -1,0 +1,2 @@
+del_pkg: [ 'tuned', 'chrony', 'firewalld', 'firewalld-filesystem', 'NetworkManager' ]
+ins_pkg: [ 'nfs-utils', 'vim', 'psmisc', 'iptables-services', 'tcpdump', 'wget', 'lsof', 'net-tools', 'bind-utils', 'git' ] 

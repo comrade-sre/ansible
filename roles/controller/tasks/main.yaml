@@ -1,0 +1,39 @@
+---
+- name: update system
+  yum: 
+    name: '*'
+    state: latest
+    update_only: yes
+- name: remove packages
+  yum:
+    name: "{{ del_pkg }}"
+    state: absent
+- name: install packages
+  yum:
+    name: "{{ ins_pkg }}"
+    state: present
+- name: nfs configuration
+  copy:
+    src: files/exports
+    dest: /etc/exports
+    force: yes
+    mode: '644'
+  notify: nfs 
+  tags: nfs
+- name: NAT
+  iptables:
+    table: nat
+    chain: POSTROUTING
+    out_interface: enp0s3
+    jump: MASQUERADE
+  notify: nat
+  tags: nat
+- name: include sysctl
+  include: sysctl.yaml    
+  tags: sysctl
+- name: disable ipv6 in rpcbind.socker
+  copy:
+    src: files/rpcbind.socket
+    dest: /etc/systemd/system/sockets.target.wants/rpcbind.socket
+  notify: rpcbind
+  tags: rpc

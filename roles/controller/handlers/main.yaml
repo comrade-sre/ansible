@@ -1,0 +1,16 @@
+---
+- name: nfs
+  systemd:
+    name: nfs
+    state: started
+    enabled: yes
+- name: nat
+  systemd:
+    name: iptables
+    state: started
+    enabled: yes
+- name: rpcbind
+  systemd:
+    name: rpcbind.socket
+    daemon_reload: yes
+    state: restarted

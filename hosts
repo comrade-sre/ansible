@@ -1,0 +1,6 @@
+[controllers]
+controller  ansible_connection=local
+[masters]
+master 
+[nodes]
+node1
