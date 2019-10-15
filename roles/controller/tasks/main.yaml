@@ -26,6 +26,9 @@
     chain: POSTROUTING
     out_interface: enp0s3
     jump: MASQUERADE
+  tags: nat
+- name: save iptables rules
+  shell: iptables-save > /etc/sysconfig/iptables
   notify: nat
   tags: nat
 - name: include sysctl

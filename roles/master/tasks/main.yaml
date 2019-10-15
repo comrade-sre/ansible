@@ -17,24 +17,8 @@
     line: '172.16.0.1:/mnt/nfs /opt/kube-configs        nfs     user,rw 0 0'
   notify: nfs
   tags: nfs
-- name: disable swap
-  lineinfile:
-    path: /etc/fstab
-    regexp: '^/swap*'
-    line: '#/swap.img'
-  tags: swap
-- name: sudoers
-  lineinfile:
-    path: /etc/sudoers
-    state: present
-    regexp: '^%SUDO ALL='
-    line: '%sudo   ALL=(ALL:ALL)   NOPASSWD: ALL'
-    validate: /usr/sbin/visudo -cf %s
-  tags: sudo
-- name: remove firewall
-  apt:
-    name: ufw
-    state: absent
 - name: include sysctl
   include: ../controller/tasks/sysctl.yaml
   tags: sysctl
+- name: include common
+  include: common.yaml

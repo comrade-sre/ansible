@@ -8,3 +8,12 @@
     state: mounted
 - name: swap
   shell: swapoff -a
+- name: docker
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+- name: hold_pkg
+  shell: apt-mark hold kubelet kubeadm kubectl
+- name: flannel
+  shell: kubectl apply -f /opt/kube-configs/flannel.yaml

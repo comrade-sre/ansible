@@ -1,0 +1,10 @@
+---
+- name: nfs
+  mount: 
+    path: /opt/kube-configs
+    src: 172.16.0.1:/mnt/nfs
+    fstype: nfs
+    opts: rw,user
+    state: mounted
+- name: swap
+  shell: swapoff -a

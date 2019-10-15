@@ -1,0 +1,6 @@
+---
+- name: include sysctl
+  include: ../controller/tasks/sysctl.yaml
+  tags: sysctl
+- name: include common
+  include: ../../master/tasks/common.yaml

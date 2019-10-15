@@ -1,5 +1,7 @@
 ---
 - hosts: masters
   become: true
+  vars_files:
+    - ./k8s_vars.yaml
   roles:
      - master
