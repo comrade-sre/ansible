@@ -22,3 +22,6 @@
   tags: sysctl
 - name: include common
   include: common.yaml
+- name: include kubernetes init
+  include: kube_init.yaml
+  tags: k8s_init

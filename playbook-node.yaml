@@ -1,5 +1,7 @@
 ---
 - hosts: nodes
   become: true
+  vars_files:
+    - ./k8s_vars.yaml
   roles:
      - node

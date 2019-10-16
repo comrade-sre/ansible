@@ -1,0 +1,21 @@
+---
+- name: cluster init
+  shell: kubeadm init --apiserver-advertise-address={{ master_ip }} --pod-network-cidr=10.244.0.0/16
+- name: create .kube
+  file: 
+    path: /home/comrade/.kube
+    owner: comrade
+    group: comrade
+    state: directory
+- name: kubectl configuration
+  shell: cp -i /etc/kubernetes/admin.conf /home/comrade/.kube/config && 
+- name: rights on config file
+  file:
+    path: home/comrade/.kube/config
+    owner: comrade
+    group: comrade
+    state: touch
+- name: download flannel
+  shell: wget  https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml -O /opt/kube-configs/flannel.yaml
+  notify: flannel
+  tags: flannel

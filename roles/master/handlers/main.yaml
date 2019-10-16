@@ -15,5 +15,10 @@
     enabled: yes
 - name: hold_pkg
   shell: apt-mark hold kubelet kubeadm kubectl
+- name: hold_pkg
+  systemd:
+    name: kubelet
+    state: started
+    enabled: yes
 - name: flannel
   shell: kubectl apply -f /opt/kube-configs/flannel.yaml
