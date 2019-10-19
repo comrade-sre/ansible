@@ -1,4 +1,15 @@
 ---
+- name: copy hosts
+  copy:
+    src: /etc/hosts
+    dest: /etc/hosts
+  tags: hosts
+- name: ntp
+  apt:
+    name: ntp
+    state: present
+  notify: ntp
+  tags: ntp
 - name: disable swap
   lineinfile:
     path: /etc/fstab
@@ -47,7 +58,7 @@
 - name: install container runtime
   apt: 
     name: docker-ce=18.06.1~ce~3-0~ubuntu 
-    state: installed
+    state: present
   tags: docker
 - name: docker configuration
   copy:

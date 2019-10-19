@@ -4,3 +4,4 @@ controller  ansible_connection=local
 master 
 [nodes]
 node1
+node2

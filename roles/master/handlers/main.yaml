@@ -22,3 +22,12 @@
     enabled: yes
 - name: flannel
   shell: kubectl apply -f /opt/kube-configs/flannel.yaml
+- name: ntp
+  copy: 
+    src: files/ntp.conf
+    dest: /etc/ntp.conf
+- name: ntp
+  systemd:
+    name: ntp
+    state: restarted
+    enabled: yes

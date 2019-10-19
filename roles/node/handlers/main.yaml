@@ -13,3 +13,12 @@
     name: kubelet
     state: started
     enabled: yes
+- name: ntp
+  copy:
+    src: files/ntp.conf
+    dest: /etc/ntp.conf
+- name: ntp
+  systemd:
+    name: ntp
+    state: restarted
+    enabled: yes
