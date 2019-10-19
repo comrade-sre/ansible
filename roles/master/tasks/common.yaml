@@ -71,3 +71,9 @@
     name: "{{ k8s_pkg }}"
   notify: hold_pkg
   tags: k8s
+- name: gluster
+  apt:
+    name: glusterfs-server
+    state: present
+  notify: gluster
+  tags: gluster

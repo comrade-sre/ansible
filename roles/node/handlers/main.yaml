@@ -22,3 +22,9 @@
     name: ntp
     state: restarted
     enabled: yes
+- name: gluster
+  systemd:
+    name: glusterd
+    state: started
+    enabled: yes
+
