@@ -48,4 +48,10 @@
   command: mv /opt/helm/linux-amd64/helm /usr/local/bin/helm
   notify: helm_init
   tags: helm_init
-
+- name: clone nginx ingress repo
+  git:
+    repo: https://github.com/nginxinc/kubernetes-ingress.git
+    dest: /opt/kube-configs/ingress
+    clone: yes
+  tags: ingress
+  notify: ingress

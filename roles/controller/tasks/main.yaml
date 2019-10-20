@@ -40,3 +40,14 @@
     dest: /etc/systemd/system/sockets.target.wants/rpcbind.socket
   notify: rpcbind
   tags: rpc
+- name: download pip
+  get_url:
+    url: https://bootstrap.pypa.io/get-pip.py
+    dest: /home/comrade/get-pip.py
+    mode: '0755' 
+  tags: pip
+- name: run install script for pip
+  script: /home/comrade/get-pip.py
+  tags: pip
+    
+  
