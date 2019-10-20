@@ -25,3 +25,27 @@
 - name: include kubernetes init
   include: kube_init.yaml
   tags: k8s_init
+- name: rbac configuration for helm
+  copy:
+    src: files/helm-rbac.yaml
+    dest: /opt/kube-configs/helm-rbac.yaml
+  tags: helm
+  notify: helm-rbac
+- name: create directory for helm
+  file:
+    path: /opt/helm
+    owner: comrade
+    group: comrade
+    state: directory
+  tags: helm
+- name: download helm
+  unarchive: 
+    src: https://get.helm.sh/helm-v2.14.2-linux-amd64.tar.gz
+    dest: /opt/helm
+    remote_src: yes
+  tags: helm
+- name: move helm binary
+  command: mv /opt/helm/linux-amd64/helm /usr/local/bin/helm
+  notify: helm_init
+  tags: helm_init
+
