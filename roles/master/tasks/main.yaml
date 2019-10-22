@@ -55,3 +55,9 @@
     clone: yes
   tags: ingress
   notify: ingress
+- name: storage class
+  copy:
+    src: files/gluster.yaml
+    dest: /opt/kube-configs/gluster.yaml
+  notify: storage_class
+  tags: storage_class

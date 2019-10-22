@@ -33,15 +33,15 @@
     enabled: yes
 - name: gluster
   systemd:
-    name: 
-- name: gluster
-  systemd:
     name: glusterd
     state: started
     enabled: yes
 - name: helm-rbac
   become_user: comrade
   shell: kubectl apply -f /opt/kube-configs/helm-rbac.yaml
+- name: storage_class
+  become_user: comrade
+  shell: kubectl  apply -f /opt/kube-configs/gluster.yaml
 - name: helm_init
   command: helm init --service-account tiller  --history-max 100
 - name: ingress
