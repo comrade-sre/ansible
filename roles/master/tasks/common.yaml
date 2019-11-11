@@ -31,6 +31,13 @@
     line: '#/swap.img'
   notify: swap
   tags: swap
+- name: check sudoers
+  shell: grep -q  NOPASSWD /etc/sudoers
+  register: contents_sudoers
+  check_mode: no
+  ignore_errors: yes
+  changed_when: no
+  tags: sudo
 - name: sudoers
   lineinfile:
     path: /etc/sudoers
@@ -38,6 +45,7 @@
     regexp: '^%sudo ALL='
     line: '%sudo   ALL=(ALL:ALL)   NOPASSWD: ALL'
     validate: /usr/sbin/visudo -cf %s
+  when: contents_sudoers.rc == 1
   tags: sudo
 - name: remove firewall
   apt:

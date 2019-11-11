@@ -10,11 +10,19 @@
     group: comrade
     state: directory
     mode: '700'
+- name: check fstab
+  shell: grep -q "nfs" /etc/fstab
+  register: contents
+  check_mode: no
+  ignore_errors: yes
+  changed_when: no
+  tags: nfs    
 - name: create record in fstab
   lineinfile:
     path: /etc/fstab
-    insertafter: 'EOF'
+    state: present
     line: '172.16.0.1:/mnt/nfs /opt/kube-configs        nfs     user,rw 0 0'
+  when: contents.rc == 1
   notify: nfs
   tags: nfs
 - name: include sysctl
